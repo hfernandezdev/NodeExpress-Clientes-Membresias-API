@@ -8,6 +8,9 @@ const bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const customerRoutes = require('./routes/customerRoutes');
+const membershipRoutes = require('./routes/membershipRoutes');
+
 var app = express();
 app.use(bodyParser.json());
 
@@ -23,5 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/api/customers', customerRoutes);
+app.use('/api/memberships', membershipRoutes);
 
 module.exports = app;
