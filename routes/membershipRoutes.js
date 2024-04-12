@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const membershipController = require('../controllers/membershipController');
+const validateCreateMembership = require('../middlewares/validateCreateMembership');
+const validateUpdateMembership = require('../middlewares/validateUpdateMembership');
 
 /**
  * @swagger
@@ -128,7 +130,7 @@ router.get('/:id', membershipController.getMembership);
  *       500:
  *         description: Error del servidor
  */
-router.post('/', membershipController.createMembership);
+router.post('/', validateCreateMembership, membershipController.createMembership);
 
 /**
  * @swagger
@@ -159,7 +161,7 @@ router.post('/', membershipController.createMembership);
  *       500:
  *         description: Error del servidor
  */
-router.put('/:id', membershipController.updateMembership);
+router.put('/:id', validateUpdateMembership, membershipController.updateMembership);
 
 /**
  * @swagger

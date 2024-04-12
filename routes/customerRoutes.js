@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const customerController = require('../controllers/customerController');
+const validateCreateCustomer = require("../middlewares/validateCreateCustomer");
+const validateUpdateCustomer = require("../middlewares/validateUpdateCustomer");
 
 /**
  * @swagger
@@ -179,7 +181,7 @@ router.get('/:id', customerController.getCustomer);
  *         description: Error del servidor
  */
 
-router.post('/', customerController.createCustomer);
+router.post('/', validateCreateCustomer, customerController.createCustomer);
 
 /**
  * @swagger
@@ -210,7 +212,7 @@ router.post('/', customerController.createCustomer);
  *       500:
  *         description: Error del servidor
  */
-router.put('/:id', customerController.updateCustomer);
+router.put('/:id', validateUpdateCustomer, customerController.updateCustomer);
 
 /**
  * @swagger
